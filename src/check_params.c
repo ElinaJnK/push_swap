@@ -6,7 +6,7 @@ void	failure()
 	exit(1);
 }
 
-unsigned int	ft_atoi_maison(const char *str)
+long long int	ft_atoi_maison(const char *str)
 {
 	int				sign;
 	int				i;
@@ -26,7 +26,7 @@ unsigned int	ft_atoi_maison(const char *str)
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + str[i++] - '0';
 
-	return (sign * nb);
+	return ((long long int)sign * nb);
 }
 
 // suppose the stack is sorted
@@ -37,7 +37,7 @@ void	check_dup(t_stack *stack)
 	i = 0;
 	while (i < stack->size - 1)
 	{
-		if (stack->tab[i] == stack->tab[i + 1])
+		if (stack->tab[i].val == stack->tab[i + 1].val)
 			return (free_stack(stack), failure());
 	}
 }
@@ -45,17 +45,21 @@ void	check_dup(t_stack *stack)
 void	check_digit(char *num, int *n, t_stack	*stack)
 {
 	size_t i;
+	long long int temp;
 
 	i = 0;
+	if (num[i] == '-')
+		i++;
 	while (i < ft_strlen(num))
 	{
 		if (num[i] < '0' || num[i] > '9')
 			failure();
 		++i;
 	}
-	*n = ft_atoi_maison(num);
-	if (*n >= INT_MAX || *n <= INT_MIN)
+	temp = ft_atoi_maison(num);
+	if (temp > INT_MAX || temp < INT_MIN)
 		return (free_stack(stack), failure());
+	*n = temp;
 }
 t_stack	*check_params(char **av, int ac)
 {
@@ -66,13 +70,13 @@ t_stack	*check_params(char **av, int ac)
 	i = 0;
 	if (!ac)
 		return (0);
-	stack = init_stack(ac);
+	stack = init_stack(ac, ac);
 	while(i < ac && av && av[i])
 	{
 		if (!av[i])
 			return (NULL);
 		check_digit(av[i], &n, stack);
-		stack->tab[i++] = n;
+		stack->tab[i++].val = n;
 	}
 	return (stack);
 }

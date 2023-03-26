@@ -1,16 +1,17 @@
 #include "../include/push_swap.h"
 
-t_stack	*init_stack(int size)
+t_stack	*init_stack(int size, int curr_size)
 {
 	t_stack	*stack;
 
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	stack->tab = (int *)malloc(sizeof(int) * size);
+	stack->tab = (t_elem *)malloc(sizeof(t_elem) * size);
 	if (!stack->tab)
 		return (NULL);
 	stack->size = size;
+	stack->curr_size = curr_size;
 	return (stack);
 }
 
