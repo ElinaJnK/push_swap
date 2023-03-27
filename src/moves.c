@@ -21,7 +21,6 @@ void	 push(t_stack *a, t_stack *b)
 	{
 		a->tab[a->size - a->curr_size - 1] = b->tab[b->size - b->curr_size];
 		b->tab[b->size - b->curr_size] = 0;
-		b->tab[b->size - b->curr_size] = 0;
 		b->curr_size -= 1;
 		a->curr_size += 1;
 	}

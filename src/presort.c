@@ -31,16 +31,19 @@ int	*copy_tab(t_stack *stack)
 	return (tab);
 }
 
-void	add_med(int *med, int imin, int imax, int n)
+void    add_med(int *med, int imin, int imax, int n)
 {
-	if (n == 1)
-		med[0] = (imin + imax) / 2;
-	else
-	{
-		med[n / 2] = (imin + imax) / 2 + 1;
-		add_med(med, imin, (imin + imax) / 2 + 1, n / 2);
-		add_med(med, (imin + imax) / 2 + 1, imax, n / 2);
-	}
+   if (n == 1) {
+        med[0] = (imin + imax) / 2;
+    } else {
+        int step = (imax - imin) / (n - 1);
+        for (int i = 0; i < n; i++) {
+            med[i] = imin + step * i;
+        }
+		if (med[0] == imin) {
+            med[0] = imin + step / 2;
+        }
+    }
 }
 
 // return the index of the median
@@ -49,7 +52,7 @@ int	*create_medianes(int size, int n)
 	int	*med;
 
 	med = (int *)malloc(sizeof(int) * n);
-	if (!med || n % 2 == 0)
+	if (!med)
 		failure();
 	// get the n medianes
 	add_med(med, 0, size - 1, n);
@@ -60,33 +63,43 @@ t_stack	*put_stack_b(t_stack *a, int *med, int n)
 {
 	t_stack	*b;
 	int	i;
-	int	j;
+	int j;
 
 	i = n - 1;
-	j = 0;
 	b = init_stack(a->size, 0);
-	while (i > 0 && a->curr_size > 3)
+	// sup >= 0 so that we get the first index
+	while (i >= 0 && a->curr_size > 3)
 	{
-		while (j < a->curr_size)
+		// we modify the curr_size in the push fuction
+		j = a->curr_size;
+		//printf("med[%d] : %d\n", i, med[i]);
+		while (j > 0)
 		{
+			if (a->curr_size <= 3)
+				break;
 			if (a->tab[a->size - a->curr_size] >= med[i])
 			{
 				ft_putstr_fd("pb\n", 1);
-				push(a, b);
+				do_move(a, b, "pb");
+				//print_array(a->tab, a->size);
 				if (b->curr_size % 2 == 0)
 				{
 					ft_putstr_fd("rr\n", 1);
-					rr(a, b);
+					do_move(a, b, "rr");
+					//print_array(a->tab, a->size);
 				}
 			}
 			else
 			{
 				ft_putstr_fd("ra\n", 1);
-				rotate(a);
+				do_move(a, b, "ra");
+				//print_array(a->tab, a->size);
 			}
-			j++;
+			--j;
 		}
-		i--;
+		//printf("array b : \n");
+		//print_array(b->tab, b->size);
+		--i;
 	}
 	return (b);
 }
@@ -107,14 +120,18 @@ t_stack	*presort(t_stack *stack)
 
 	// put positions in stack
 	update_stack(sorted_tab, stack);
+	printf("Print the sorted stack : \n");
 	print_array(stack->tab, stack->size);
 
 	// find the medianes, n is always odd the number of medianes
 	med = create_medianes(stack->size, 3);
-	print_array(med, 3);
+	printf("Print the array of medians : \n");
+	print_array(med, stack->size);
 
 	b = put_stack_b(stack, med, 3);
-
+	printf("Print the stack a after pushing everything to it : \n");
+	print_array(stack->tab, stack->size);
+	printf("Print the stack b after pushing everything to it : \n");
 	free(med);
 	free(sorted_tab);
 	return (b);
