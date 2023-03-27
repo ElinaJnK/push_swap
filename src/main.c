@@ -14,8 +14,10 @@ int	main(int ac, char *av[])
 	t_stack	*b;
 
 	a = check_params(av + 1, ac - 1);
+	print_array(a->tab, a->size);
 	b = presort(a);
-	sort(a, b);
+	print_array(b->tab, b->size);
+	//sort(a, b);
 	return (0);
 }
 

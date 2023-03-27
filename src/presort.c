@@ -41,7 +41,6 @@ void	add_med(int *med, int imin, int imax, int n)
 		add_med(med, imin, (imin + imax) / 2 + 1, n / 2);
 		add_med(med, (imin + imax) / 2 + 1, imax, n / 2);
 	}
-	
 }
 
 // return the index of the median
@@ -72,18 +71,18 @@ t_stack	*put_stack_b(t_stack *a, int *med, int n)
 		{
 			if (a->tab[a->size - a->curr_size] >= med[i])
 			{
-				ft_putstr("pb\n");
+				ft_putstr_fd("pb\n", 1);
 				push(a, b);
 				if (b->curr_size % 2 == 0)
 				{
-					ft_putstr("rr\n");
+					ft_putstr_fd("rr\n", 1);
 					rr(a, b);
 				}
 			}
 			else
 			{
-				ft_putstr("ra\n");
-				ra(a);
+				ft_putstr_fd("ra\n", 1);
+				rotate(a);
 			}
 			j++;
 		}
@@ -104,7 +103,7 @@ t_stack	*presort(t_stack *stack)
 
 	// get the sorted stack
 	quicksort(sorted_tab, 0, stack->size - 1);
-	print_array(stack->tab, stack->size);
+	print_array(sorted_tab, stack->size);
 
 	// put positions in stack
 	update_stack(sorted_tab, stack);
