@@ -1,12 +1,25 @@
 #include "../include/push_swap.h"
 
-void print_array(t_elem *arr, int size) {
+void print_array(int *arr, int size) {
     for(int i = 0; i < size; i++) {
-        printf("%d ", arr[i].val);
+        printf("%d ", arr[i]);
     }
     printf("\n");
 }
 
+
+int	main(int ac, char *av[])
+{
+	t_stack *a;
+	t_stack	*b;
+
+	a = check_params(av + 1, ac - 1);
+	b = presort(a);
+	sort(a, b);
+	return (0);
+}
+
+/*
 int	main(int ac, char *av[])
 {
 	t_stack *stack_a;
@@ -82,3 +95,4 @@ int	main(int ac, char *av[])
 	print_array(stack_b->tab, stack_b->size);
 	return (0);
 }
+*/

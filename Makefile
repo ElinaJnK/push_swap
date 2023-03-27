@@ -5,6 +5,7 @@ NAME		= push_swap
 SOURCES		= 	main.c			\
 				check_params.c	\
 				quicksort.c		\
+				presort.c 		\
 				stack.c			\
 				double_moves.c	\
 				moves.c			\

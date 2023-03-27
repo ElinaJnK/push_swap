@@ -3,7 +3,7 @@
 
 void	swap(t_stack *s)
 {
-	t_elem	temp;
+	int	temp;
 
 	if (s->curr_size > 1)
 	{
@@ -20,8 +20,8 @@ void	 push(t_stack *a, t_stack *b)
 	if (b->curr_size > 0)
 	{
 		a->tab[a->size - a->curr_size - 1] = b->tab[b->size - b->curr_size];
-		b->tab[b->size - b->curr_size].val = 0;
-		b->tab[b->size - b->curr_size].pos = 0;
+		b->tab[b->size - b->curr_size] = 0;
+		b->tab[b->size - b->curr_size] = 0;
 		b->curr_size -= 1;
 		a->curr_size += 1;
 	}
@@ -32,8 +32,8 @@ void	 push(t_stack *a, t_stack *b)
 void	rotate(t_stack *s)
 {
 	int		i;
-	t_elem	prev;
-	t_elem	tmp;
+	int		prev;
+	int		tmp;
 
 	if (s->curr_size > 1)
 	{
@@ -54,8 +54,8 @@ void	rotate(t_stack *s)
 void reverse_rotate(t_stack *s)
 {
 	int		i;
-	t_elem	prev;
-	t_elem	tmp;
+	int		prev;
+	int		tmp;
 
 	if (s->curr_size > 1)
 	{

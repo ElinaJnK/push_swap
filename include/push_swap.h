@@ -7,25 +7,23 @@
 # include <limits.h>
 # include "../libft/libft.h"
 
-typedef struct s_elem
-{
-	int	pos;
-	int	val;
-}	t_elem;
-
 typedef struct s_stack
 {
-	t_elem	*tab;
+	int		*tab;
 	int		curr_size;
 	int		size;
 }	t_stack;
 
+void print_array(int *arr, int size);
+
+t_stack	*presort(t_stack *stack);
+
 t_stack	*init_stack(int size, int curr_size);
 void	free_stack(t_stack *stack);
+void	update_stack(int *sorted_tab, t_stack *stack);
 void	quicksort(int *tab, int min, int max);
 t_stack	*check_params(char **av, int ac);
 void	failure();
-
 
 void	swap(t_stack *s);
 void	push(t_stack *a, t_stack *b);

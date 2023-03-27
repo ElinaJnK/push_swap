@@ -14,38 +14,109 @@
 */
 
 //copy into stack the tab 
-void	copy_tab(int *tab, t_stack *stack)
+int	*copy_tab(t_stack *stack)
 {
 	int	i;
+	int	*tab;
 
 	i = 0;
+	tab = malloc(sizeof(int) * stack->size);
+	if (!tab)
+		failure();
 	while (i < stack->size)
 	{
-		tab[i] = stack->tab[i].val;
+		tab[i] = stack->tab[i];
 		i++;
 	}
+	return (tab);
+}
+
+void	add_med(int *med, int imin, int imax, int n)
+{
+	if (n == 1)
+		med[0] = (imin + imax) / 2;
+	else
+	{
+		med[n / 2] = (imin + imax) / 2 + 1;
+		add_med(med, imin, (imin + imax) / 2 + 1, n / 2);
+		add_med(med, (imin + imax) / 2 + 1, imax, n / 2);
+	}
+	
 }
 
 // return the index of the median
-int	*create_medianes(int *tab, int n)
+int	*create_medianes(int size, int n)
 {
 	int	*med;
 
 	med = (int *)malloc(sizeof(int) * n);
+	if (!med || n % 2 == 0)
+		failure();
+	// get the n medianes
+	add_med(med, 0, size - 1, n);
 	return med;
 }
 
-void	sort_and_mediane(t_stack *stack)
+t_stack	*put_stack_b(t_stack *a, int *med, int n)
 {
-	int	*sorted_tab;
+	t_stack	*b;
+	int	i;
+	int	j;
 
-	sorted_tab = malloc(sizeof(int) * stack->size);
-	copy_tab(sorted_tab, stack);
+	i = n - 1;
+	j = 0;
+	b = init_stack(a->size, 0);
+	while (i > 0 && a->curr_size > 3)
+	{
+		while (j < a->curr_size)
+		{
+			if (a->tab[a->size - a->curr_size] >= med[i])
+			{
+				ft_putstr("pb\n");
+				push(a, b);
+				if (b->curr_size % 2 == 0)
+				{
+					ft_putstr("rr\n");
+					rr(a, b);
+				}
+			}
+			else
+			{
+				ft_putstr("ra\n");
+				ra(a);
+			}
+			j++;
+		}
+		i--;
+	}
+	return (b);
+}
+
+t_stack	*presort(t_stack *stack)
+{
+	int		*sorted_tab;
+	int		*med;
+	t_stack	*b;
+
 	if (!stack)
 		failure();
+	sorted_tab = copy_tab(stack);
+
 	// get the sorted stack
 	quicksort(sorted_tab, 0, stack->size - 1);
-	// find the mediane index
-	create_medianes(sorted_tab, stack->size);
-	// update positions in stac
+	print_array(stack->tab, stack->size);
+
+	// put positions in stack
+	update_stack(sorted_tab, stack);
+	print_array(stack->tab, stack->size);
+
+	// find the medianes, n is always odd the number of medianes
+	med = create_medianes(stack->size, 3);
+	print_array(med, 3);
+
+	b = put_stack_b(stack, med, 3);
+
+	free(med);
+	free(sorted_tab);
+	return (b);
 }

@@ -37,7 +37,7 @@ void	check_dup(t_stack *stack)
 	i = 0;
 	while (i < stack->size - 1)
 	{
-		if (stack->tab[i].val == stack->tab[i + 1].val)
+		if (stack->tab[i] == stack->tab[i + 1])
 			return (free_stack(stack), failure());
 	}
 }
@@ -76,7 +76,7 @@ t_stack	*check_params(char **av, int ac)
 		if (!av[i])
 			return (NULL);
 		check_digit(av[i], &n, stack);
-		stack->tab[i++].val = n;
+		stack->tab[i++] = n;
 	}
 	return (stack);
 }
