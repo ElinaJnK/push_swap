@@ -15,8 +15,10 @@ typedef struct s_stack
 }	t_stack;
 
 void print_array(int *arr, int size);
+void print_array_double(double *arr, int size);
 
 t_stack	*presort(t_stack *stack);
+void	sort(t_stack *a, t_stack *b);
 
 t_stack	*init_stack(int size, int curr_size);
 void	free_stack(t_stack *stack);
@@ -24,6 +26,7 @@ void	update_stack(int *sorted_tab, t_stack *stack);
 void	quicksort(int *tab, int min, int max);
 t_stack	*check_params(char **av, int ac);
 void	failure();
+void	check_dup(int *tab, int size);
 
 void	swap(t_stack *s);
 void	push(t_stack *a, t_stack *b);

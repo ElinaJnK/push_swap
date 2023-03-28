@@ -9,6 +9,7 @@ SOURCES		= 	main.c			\
 				stack.c			\
 				double_moves.c	\
 				moves.c			\
+				costs.c			\
 
 LIBFT		= libft
 

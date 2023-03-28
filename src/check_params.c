@@ -30,15 +30,16 @@ long long int	ft_atoi_maison(const char *str)
 }
 
 // suppose the stack is sorted
-void	check_dup(t_stack *stack)
+void	check_dup(int *tab, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < stack->size - 1)
+	while (i < size - 1)
 	{
-		if (stack->tab[i] == stack->tab[i + 1])
-			return (free_stack(stack), failure());
+		if (tab[i] == tab[i + 1])
+			return (free(tab), failure());
+		i++;
 	}
 }
 

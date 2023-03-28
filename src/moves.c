@@ -74,6 +74,8 @@ void reverse_rotate(t_stack *s)
 
 void	do_move(t_stack *a, t_stack *b, char *move)
 {
+	ft_putstr_fd(move, 1);
+	ft_putstr_fd("\n", 1);
 	if (ft_strncmp(move, "sa", ft_strlen(move)) == 0)
 		swap(a);
 	else if (ft_strncmp(move, "sb", ft_strlen(move)) == 0)
