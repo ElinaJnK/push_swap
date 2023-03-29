@@ -3,7 +3,7 @@
 /*
 	Calcul de coups
 	- Ecrire une fonction qui prend un element dans b et qui trouve le parent dans a
-	- Faire une fonction qui donne une liste d'index de prix [0, 1, 2, 3, -2, -1]
+	 GOOD - Faire une fonction qui donne une liste d'index de prix [0, 1, 2, 3, -2, -1]
 	- Une boucle qui trouve l'element le moins cher a rotate
 	- Une fonction qui fait les movements (rotation) de l'element donne
 */
@@ -26,7 +26,7 @@ void	check_valid_elem(t_stack *a, int elem)
 // get the position of the papa in the stack
 // we must send elem + 1 to get the position
 // val(parent) = val(elem) + 1 || elem == stack->size -1 => return 0
-int		get_papa_a(t_stack *a, int elem)
+int		get_papa_abis(t_stack *a, int elem)
 {
 	int	i;
 	int	j;
@@ -40,12 +40,16 @@ int		get_papa_a(t_stack *a, int elem)
 	{
 		while (i < a->size)
 		{
+			if (a->tab[i] == 0 && elem == a->size - 1)
+				return (i);
 			if (a->tab[i] == elem + 1)
 				return (i);
 			i++;
 		}
 		i = a->size - a->curr_size;
+		// why do we need this ?
 		++elem;
+		// why do we need this ?
 		elem = elem % (a->size);
 		//printf("elem : %d\n", elem);
 		++j;
@@ -71,7 +75,7 @@ int	ft_abs(int val)
 - take the absolute value of both numbers and add it and that will be your cost
 - we count in ra and rb, rra, rrb for now (next we'll implement rrr and rr)*/
 // returns the index of the least exepensive cost (index in b)
-int	best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b)
+int	best_costbis(t_stack *a, t_stack *b, int *cost_a, int *cost_b)
 {
 	int	b_it;
 	int	index;
@@ -79,6 +83,7 @@ int	best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b)
 	int	min_cost;
 
 	b_it = b->size - b->curr_size;
+	// not sure of it
 	min_cost = cost_b[b->tab[b_it]] + cost_a[a->tab[a->size - a->curr_size]];
 	cost = 0;
 	index = b_it;
@@ -89,6 +94,85 @@ int	best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b)
 			cost = ft_abs(cost_a[get_papa_a(a, b->tab[b_it])]);
 		else
 			cost = ft_abs(cost_a[get_papa_a(a, b->tab[b_it])]) + ft_abs(cost_b[b->tab[b_it]]);
+		if (cost < min_cost)
+		{
+			index = b_it;
+			min_cost = cost;
+		}
+		++b_it;
+	}
+	return (index);
+}
+
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+int ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	find_tot_cost(int cost_a, int cost_b)
+{
+	if (cost_a > 0 && cost_b > 0)
+		// here we have rr (rotate a, rotate b)
+		return (ft_max(cost_a, cost_b));
+	else if (cost_a < 0 && cost_b < 0)
+		// here we have rrr (reverse rotate a, reverse rotate b)
+		// I put "-" to make it positive
+		return (-ft_min(cost_a, cost_b));
+	else
+		// otherwise we have | certain rotate a (rotate, rev rotate) + certain rotate b (rotate, rev rotate) | or 0 cost
+		return (ft_abs(cost_a) + ft_abs(cost_b));
+}
+
+//on veut le parent dont la valeur est la plus proche "superieurement" de la valeur de l'element dans b
+// trouver le min dans stack a dans l'intervalle [elem + 1, stack->size - 1]
+int	get_papa_a(t_stack *a, int elem) {
+    int	i;
+	int min;
+	int index;
+
+	index = 0;
+	min = a->size - 1;
+	i = a->size - a->curr_size;
+	check_valid_elem(a, elem);
+	while (i < a->size)
+	{
+		if (a->tab[i] == 0 && elem == a->size - 1)
+			return (i);
+		if (a->tab[i] > elem && a->tab[i] < min)
+		{
+			min = a->tab[i];
+			index = i;
+		}	
+		i++;
+	}
+	return (index);
+}
+
+int	best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b)
+{
+	int	b_it;
+	int	index;
+	int	cost;
+	int	min_cost;
+
+	b_it = b->size - b->curr_size;
+	// at the beginning we check the cost of the first element in b (cost = 0)
+	// and the cost of putting its parent in a on top of a
+	min_cost = cost_a[a->tab[get_papa_a(a, b->tab[b_it])]];
+	cost = 0;
+	index = b_it;
+	while (b_it < b->size)
+	{
+		cost = find_tot_cost(cost_a[get_papa_a(a, b->tab[b_it])], cost_b[b->tab[b_it]]);
 		if (cost < min_cost)
 		{
 			index = b_it;
@@ -157,5 +241,5 @@ void	sort(t_stack *a, t_stack *b)
 	printf("cost b: \n");
 	print_array(cost_b_aroc, b->size);
 	int cost = best_cost(a, b, cost_a_rica, cost_b_aroc);
-	printf("this is the best cost (?) : %d\n", cost);
+	printf("this is the best index to choose for cost : %d\n", cost);
 }
