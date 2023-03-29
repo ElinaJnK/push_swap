@@ -27,6 +27,8 @@ void	quicksort(int *tab, int min, int max);
 t_stack	*check_params(char **av, int ac);
 void	failure();
 void	check_dup(int *tab, int size);
+int		get_papa_a(t_stack *a, int elem);
+int		best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b);
 
 void	swap(t_stack *s);
 void	push(t_stack *a, t_stack *b);

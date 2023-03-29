@@ -24,5 +24,6 @@ int	main(int ac, char *av[])
 	b = presort(a);
 	print_array(b->tab, b->size);
 	sort(a, b);
+	printf("papa de a: %d\n", get_papa_a(a, 3));
 	return (0);
 }
