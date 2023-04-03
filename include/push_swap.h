@@ -24,8 +24,10 @@ void	do_while_both(t_stack *a, t_stack *b, int *ca, int *cb);
 void	do_while_a(t_stack *a, t_stack *b, int *ca);
 void	do_while_b(t_stack *a, t_stack *b, int *cb);
 
-t_stack	*presort(t_stack *stack);
+t_stack	*presort(t_stack *a, t_stack *b);
 void	sort(t_stack *a, t_stack *b);
+void	sort_3(t_stack *a, t_stack *b);
+void	sort_5(t_stack *a, t_stack *b);
 
 t_stack	*init_stack(int size, int curr_size);
 void	free_stack(t_stack *stack);

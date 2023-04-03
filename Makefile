@@ -13,6 +13,7 @@ SOURCES		= 	main.c			\
 				costs.c			\
 				cost_utils.c 	\
 				do_while_costs.c\
+				sort_n.c		\
 
 SOURCES_BONUS = checker.c		\
 				check_params.c	\
@@ -21,6 +22,8 @@ SOURCES_BONUS = checker.c		\
 				stack.c			\
 				double_moves.c	\
 				moves.c			\
+				cost_utils.c 	\
+				sort_n.c		\
 
 LIBFT		= libft
 

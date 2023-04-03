@@ -48,14 +48,12 @@ double	*create_medianes(int size, int n)
 	return (med);
 }
 
-t_stack	*put_stack_b(t_stack *a, double *med, int n)
+static t_stack	*put_stack_b(t_stack *a, t_stack *b, double *med, int n)
 {
-	t_stack	*b;
 	int		i;
 	int		j;
 
 	i = n - 1;
-	b = init_stack(a->size, 0);
 	while (i >= 0)
 	{
 		j = a->size;
@@ -76,47 +74,15 @@ t_stack	*put_stack_b(t_stack *a, double *med, int n)
 	return (b);
 }
 
-void	sort_3(t_stack *a, t_stack *b)
+t_stack	*presort(t_stack *a, t_stack *b)
 {
-	// 0 1
-	if (a->tab[a->size - a->curr_size] > a->tab[a->size - a->curr_size + 1])
-		do_move(a, b, "sa");
-	// 0 2
-	if (a->tab[a->size - a->curr_size] > a->tab[a->size - a->curr_size + 2])
-	{
-		do_move(a, b, "ra");
-		if (a->tab[a->size - a->curr_size] > a->tab[a->size - a->curr_size + 1])
-			do_move(a, b, "sa");
-	}
-	// 1 2
-	if (a->tab[a->size - a->curr_size + 1] > a->tab[a->size - a->curr_size + 2])
-	{
-		do_move(a, b, "rra");
-		if (a->tab[a->size - a->curr_size] > a->tab[a->size - a->curr_size + 1])
-			do_move(a, b, "sa");
-	}
-}
-
-t_stack	*presort(t_stack *stack)
-{
-	int		*sorted_tab;
 	double	*med;
 	int		n;
-	t_stack	*b;
 
-	if (!stack)
-		failure();
-	sorted_tab = copy_tab(stack);
-	if (!sorted_tab)
-		return (free_stack(stack), NULL);
-	quicksort(sorted_tab, 0, stack->size - 1);
-	check_dup(sorted_tab, stack->size);
-	update_stack(sorted_tab, stack);
 	n = 2;
-	med = create_medianes(stack->size, n);
-	b = put_stack_b(stack, med, n);
-	sort_3(stack, b);
+	med = create_medianes(a->size, n);
+	put_stack_b(a, b, med, n);
+	sort_3(a, b);
 	free(med);
-	free(sorted_tab);
 	return (b);
 }
