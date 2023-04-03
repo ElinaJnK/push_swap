@@ -1,6 +1,6 @@
 #include "../include/push_swap.h"
 
-void	failure()
+void	failure(void)
 {
 	write(STDERR_FILENO, "Error\n", ft_strlen("Error\n"));
 	exit(1);
@@ -25,11 +25,9 @@ long long int	ft_atoi_maison(const char *str)
 	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + str[i++] - '0';
-
 	return ((long long int)sign * nb);
 }
 
-// suppose the stack is sorted
 void	check_dup(int *tab, int size)
 {
 	int	i;
@@ -45,8 +43,8 @@ void	check_dup(int *tab, int size)
 
 void	check_digit(char *num, int *n, t_stack	*stack)
 {
-	size_t i;
-	long long int temp;
+	size_t			i;
+	long long int	temp;
 
 	i = 0;
 	if (num[i] == '-')
@@ -62,6 +60,7 @@ void	check_digit(char *num, int *n, t_stack	*stack)
 		return (free_stack(stack), failure());
 	*n = temp;
 }
+
 t_stack	*check_params(char **av, int ac)
 {
 	t_stack	*stack;
@@ -72,7 +71,7 @@ t_stack	*check_params(char **av, int ac)
 	if (!ac)
 		return (0);
 	stack = init_stack(ac, ac);
-	while(i < ac && av && av[i])
+	while (i < ac && av && av[i])
 	{
 		if (!av[i])
 			return (NULL);

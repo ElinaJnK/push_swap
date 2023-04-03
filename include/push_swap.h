@@ -14,8 +14,15 @@ typedef struct s_stack
 	int		size;
 }	t_stack;
 
-void print_array(int *arr, int size);
-void print_array_double(double *arr, int size);
+int		ft_abs(int val);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
+
+int		*copy_tab(t_stack *stack);
+
+void	do_while_both(t_stack *a, t_stack *b, int *ca, int *cb);
+void	do_while_a(t_stack *a, t_stack *b, int *ca);
+void	do_while_b(t_stack *a, t_stack *b, int *cb);
 
 t_stack	*presort(t_stack *stack);
 void	sort(t_stack *a, t_stack *b);
@@ -25,7 +32,7 @@ void	free_stack(t_stack *stack);
 void	update_stack(int *sorted_tab, t_stack *stack);
 void	quicksort(int *tab, int min, int max);
 t_stack	*check_params(char **av, int ac);
-void	failure();
+void	failure(void);
 void	check_dup(int *tab, int size);
 int		get_papa_a(t_stack *a, int elem);
 int		best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b);

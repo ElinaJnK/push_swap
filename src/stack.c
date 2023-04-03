@@ -21,7 +21,7 @@ void	free_stack(t_stack *stack)
 	free(stack);
 }
 
-int		get_i(int *sorted_tab, int value)
+int	get_i(int *sorted_tab, int value)
 {
 	int	i;
 
