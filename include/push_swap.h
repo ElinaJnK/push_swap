@@ -28,6 +28,9 @@ t_stack	*presort(t_stack *a, t_stack *b);
 void	sort(t_stack *a, t_stack *b);
 void	sort_3(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
+void	sort_100(t_stack *a, t_stack *b);
+int		check_sorted(t_stack *a);
+void	till_not_sorted(t_stack *a, t_stack *b);
 
 t_stack	*init_stack(int size, int curr_size);
 void	free_stack(t_stack *stack);

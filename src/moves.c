@@ -71,39 +71,6 @@ void	reverse_rotate(t_stack *s)
 		failure();
 }
 
-void print_array(int *arr1, int *arr2, int size) {
-    for(int i = 0; i < size; i++) {
-        printf("|  %d  |\t\t|  %d  |\n", arr1[i], arr2[i]);
-    }
-    printf("\n");
-}
-
-void print_stacks(t_stack *a, t_stack *b) {
-	int i = a->size - 1, j = b->size - 1; 
-	while (i >= a->size - a->curr_size || j >= b->size - b->curr_size)
-   {
-		if (j >= b->size - b->curr_size && i >= a->size - a->curr_size)
-       		printf("|  %d  |\t|  %d  |\n", a->tab[i], b->tab[j]);
-		else if (j >= b->size - b->curr_size)
-			printf("|     |\t|  %d  |\n", b->tab[j]);
-		else if (i >= a->size - a->curr_size)
-			printf("|  %d  |\t|     |\n", a->tab[i]);
-		--i;
-		--j;
-    }
-    printf("\n");
-}
-
-void print_s(t_stack *a){
-    for(int i = 0; i < a->size; i++) {
-		if (i >= a->size - a->curr_size)
-			printf("%d  ", a->tab[i]);
-        else
-			printf("0 ");
-    }
-    printf("\n");
-}
-
 void	do_move(t_stack *a, t_stack *b, char *move)
 {
 	ft_putstr_fd(move, 1);
@@ -130,6 +97,4 @@ void	do_move(t_stack *a, t_stack *b, char *move)
 		reverse_rotate(b);
 	else if (ft_strncmp(move, "rrr", ft_strlen(move)) == 0)
 		rrr(a, b);
-	//print_s(a);
-	//print_s(b);
 }

@@ -1,5 +1,22 @@
 #include "../include/push_swap.h"
 
+int	check_sorted(t_stack *a)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = a->size - a->curr_size;
+	while (i < a->size - 1)
+	{
+		if (a->tab[i] != j)
+			return (EXIT_FAILURE);
+		++i;
+		++j;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	sort_3(t_stack *a, t_stack *b)
 {
 	int	top;
@@ -27,23 +44,6 @@ void	sort_3(t_stack *a, t_stack *b)
 		do_move(a, b, "rra");
 }
 
-int	check_sorted(t_stack *a)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = a->size - a->curr_size;
-	while (i < a->size - 1)
-	{
-		if (a->tab[i] != j)
-			return (EXIT_FAILURE);
-		++i;
-		++j;
-	}
-	return (EXIT_SUCCESS);
-}
-
 void	sort_5(t_stack *a, t_stack *b)
 {
 	int	i1;
@@ -68,6 +68,13 @@ void	sort_5(t_stack *a, t_stack *b)
 			do_move(a, b, "rra");
 	}
 	do_move(a, b, "pa");
-	while (check_sorted(a) == EXIT_FAILURE)
-		do_move(a, b, "ra");
+	till_not_sorted(a, b);
+}
+
+void	sort_100(t_stack *a, t_stack *b)
+{
+	while (a->curr_size > 3)
+		do_move(a, b, "pb");
+	sort_3(a, b);
+	sort(a, b);
 }

@@ -42,3 +42,18 @@ void	update_stack(int *sorted_tab, t_stack *stack)
 		i++;
 	}
 }
+
+void	till_not_sorted(t_stack *a, t_stack *b)
+{
+	int	i;
+
+	i = 0;
+	while (a->tab[i] != 0)
+		i++;
+	if (i < a->size / 2)
+		while (check_sorted(a) == EXIT_FAILURE)
+			do_move(a, b, "ra");
+	else
+		while (check_sorted(a) == EXIT_FAILURE)
+			do_move(a, b, "rra");
+}

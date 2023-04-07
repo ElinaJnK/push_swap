@@ -86,8 +86,7 @@ void	sort(t_stack *a, t_stack *b)
 		cost_push(b, cost_b_aroc);
 		put_to_a(a, b, cost_a_rica, cost_b_aroc);
 	}
-	while (a->tab[0] != 0)
-		do_move(a, b, "ra");
+	till_not_sorted(a, b);
 	free(cost_a_rica);
 	free(cost_b_aroc);
 }

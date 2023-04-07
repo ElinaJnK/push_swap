@@ -22,7 +22,9 @@ SOURCES_BONUS = checker.c		\
 				stack.c			\
 				double_moves.c	\
 				moves.c			\
+				costs.c			\
 				cost_utils.c 	\
+				do_while_costs.c\
 				sort_n.c		\
 
 LIBFT		= libft
