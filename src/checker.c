@@ -63,6 +63,8 @@ int	main(int ac, char **av)
 	t_stack	*b;
 	int		*sorted_tab;
 
+	if (ac < 2)
+		return (EXIT_SUCCESS);
 	a = check_params(av + 1, ac - 1);
 	sorted_tab = copy_tab(a);
 	if (!sorted_tab)

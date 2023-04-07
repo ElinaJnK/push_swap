@@ -11,7 +11,7 @@ void	swap(t_stack *s)
 		s->tab[s->size - s->curr_size + 1] = temp;
 	}
 	else
-		failure();
+		return (ft_putstr_fd("KO\n", 1), exit(EXIT_FAILURE));
 }
 
 void	push(t_stack *a, t_stack *b)
@@ -24,7 +24,7 @@ void	push(t_stack *a, t_stack *b)
 		a->curr_size += 1;
 	}
 	else
-		failure();
+		return (ft_putstr_fd("KO\n", 1), exit(EXIT_FAILURE));
 }
 
 void	rotate(t_stack *s)
@@ -33,6 +33,8 @@ void	rotate(t_stack *s)
 	int		prev;
 	int		tmp;
 
+	if (s->curr_size == 1)
+		return ;
 	if (s->curr_size > 1)
 	{
 		i = s->size - 1;
@@ -46,7 +48,7 @@ void	rotate(t_stack *s)
 		}
 	}
 	else
-		failure();
+		return (ft_putstr_fd("KO\n", 1), exit(EXIT_FAILURE));
 }
 
 void	reverse_rotate(t_stack *s)
@@ -55,6 +57,8 @@ void	reverse_rotate(t_stack *s)
 	int		prev;
 	int		tmp;
 
+	if (s->curr_size == 1)
+		return ;
 	if (s->curr_size > 1)
 	{
 		i = s->size - s->curr_size;
@@ -68,7 +72,7 @@ void	reverse_rotate(t_stack *s)
 		}
 	}
 	else
-		failure();
+		return (ft_putstr_fd("KO\n", 1), exit(EXIT_FAILURE));
 }
 
 void	do_move(t_stack *a, t_stack *b, char *move)
