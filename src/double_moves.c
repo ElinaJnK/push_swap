@@ -43,4 +43,5 @@ int	do_first_half(t_stack *a, t_stack *b, char *move)
 		return (push(b, a));
 	else if (ft_strncmp(move, "ra", ft_strlen(move)) == 0)
 		return (rotate(a));
+	return (EXIT_SUCCESS);
 }
