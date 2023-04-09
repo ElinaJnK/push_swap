@@ -21,14 +21,15 @@ int	ft_min(int a, int b)
 	return (b);
 }
 
-void	check_valid_elem(t_stack *a, int elem)
+int	check_valid_elem(t_stack *a, int elem)
 {
 	int	i;
 
 	i = a->size - a->curr_size;
 	while (i < a->size)
 		if (a->tab[i++] == elem)
-			failure();
+			return (-1);
+	return (0);
 }
 
 int	get_papa_a(t_stack *a, int elem)
@@ -38,7 +39,8 @@ int	get_papa_a(t_stack *a, int elem)
 
 	i = a->size - a->curr_size;
 	j = 0;
-	check_valid_elem(a, elem);
+	if (check_valid_elem(a, elem) == -1)
+		return (-1);
 	while (j < a->size)
 	{
 		while (i < a->size)

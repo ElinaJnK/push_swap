@@ -38,16 +38,20 @@ void	update_stack(int *sorted_tab, t_stack *stack);
 void	quicksort(int *tab, int min, int max);
 t_stack	*check_params(char **av, int ac);
 void	failure(void);
+void	failure_free(t_stack *a, t_stack *b, const char *s);
 void	check_dup(int *tab, int size);
+void check_digit(char * num, int * n, t_stack * stack);
 int		get_papa_a(t_stack *a, int elem);
 int		best_cost(t_stack *a, t_stack *b, int *cost_a, int *cost_b);
 
-void	swap(t_stack *s);
-void	push(t_stack *a, t_stack *b);
-void	rotate(t_stack *s);
-void	reverse_rotate(t_stack *s);
-void	rr(t_stack *a, t_stack *b);
-void	rrr(t_stack *a, t_stack *b);
-void	ss(t_stack *a, t_stack *b);
+int		swap(t_stack *s);
+int		push(t_stack *a, t_stack *b);
+int		rotate(t_stack *s);
+int		reverse_rotate(t_stack *s);
+int		rr(t_stack *a, t_stack *b);
+int		rrr(t_stack *a, t_stack *b);
+int		ss(t_stack *a, t_stack *b);
 void	do_move(t_stack *a, t_stack *b, char *move);
+int		do_first_half(t_stack *a, t_stack *b, char *move);
+void	some_func(t_stack *a, t_stack *b, char *move, int i);
 #endif

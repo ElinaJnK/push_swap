@@ -43,7 +43,7 @@ double	*create_medianes(int size, int n)
 
 	med = (double *)malloc(sizeof(double) * n);
 	if (!med)
-		failure();
+		return (NULL);
 	add_med(med, (double)(size - 1), n);
 	return (med);
 }
@@ -81,6 +81,8 @@ t_stack	*presort(t_stack *a, t_stack *b)
 
 	n = 2;
 	med = create_medianes(a->size, n);
+	if (!med)
+		return (failure_free(a, b, "Error\n"), NULL);
 	put_stack_b(a, b, med, n);
 	sort_3(a, b);
 	free(med);

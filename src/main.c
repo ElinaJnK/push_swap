@@ -27,7 +27,7 @@ int	main(int ac, char *av[])
 	b = init_stack(a->size, 0);
 	sorted_tab = copy_tab(a);
 	if (!a || !b || !sorted_tab)
-		return (free_stack(a), free_stack(b), EXIT_FAILURE);
+		return (free(sorted_tab), free_stack(a), free_stack(b), EXIT_FAILURE);
 	quicksort(sorted_tab, 0, a->size - 1);
 	check_dup(sorted_tab, a->size);
 	update_stack(sorted_tab, a);

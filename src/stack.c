@@ -17,8 +17,10 @@ t_stack	*init_stack(int size, int curr_size)
 
 void	free_stack(t_stack *stack)
 {
-	free(stack->tab);
-	free(stack);
+	if (stack->tab)
+		free(stack->tab);
+	if (stack)
+		free(stack);
 }
 
 int	get_i(int *sorted_tab, int value)

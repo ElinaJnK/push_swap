@@ -1,4 +1,5 @@
 #include "../include/push_swap.h"
+#include "push_swap.h"
 
 void	failure(void)
 {
@@ -6,26 +7,12 @@ void	failure(void)
 	exit(1);
 }
 
-long long int	ft_atoi_maison(const char *str)
+void	failure_free(t_stack *a, t_stack *b, const char *str)
 {
-	int				sign;
-	int				i;
-	unsigned int	nb;
-
-	nb = 0;
-	sign = 1;
-	i = 0;
-	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		nb = nb * 10 + str[i++] - '0';
-	return ((long long int)sign * nb);
+	free_stack(a);
+	free_stack(b);
+	ft_putstr_fd(str, 1);
+	exit(1);
 }
 
 void	check_dup(int *tab, int size)
@@ -45,20 +32,27 @@ void	check_digit(char *num, int *n, t_stack	*stack)
 {
 	size_t			i;
 	long long int	temp;
+	int				sign;
 
 	i = 0;
+	sign = 1;
+	temp = 0;
 	if (num[i] == '-')
+	{
 		i++;
-	while (i < ft_strlen(num))
+		sign = -1;
+	}
+	while (num[i])
 	{
 		if (num[i] < '0' || num[i] > '9')
-			failure();
-		++i;
+			return (free_stack(stack), failure());
+		temp = temp * 10 + num[i++] - '0';
+		if (temp > INT_MAX || temp < INT_MIN)
+			return (free_stack(stack), failure());
 	}
-	temp = ft_atoi_maison(num);
-	if (temp > INT_MAX || temp < INT_MIN)
+	if ((ft_strlen(num) == 1 && sign == -1))
 		return (free_stack(stack), failure());
-	*n = temp;
+	*n = temp * sign;
 }
 
 t_stack	*check_params(char **av, int ac)
