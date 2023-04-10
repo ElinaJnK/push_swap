@@ -42,6 +42,8 @@ void	check_digit(char *num, int *n, t_stack	*stack)
 		i++;
 		sign = -1;
 	}
+	else if (num[i] == '+')
+		i++;
 	while (num[i])
 	{
 		if (num[i] < '0' || num[i] > '9')
@@ -50,7 +52,7 @@ void	check_digit(char *num, int *n, t_stack	*stack)
 		if (temp > INT_MAX || temp < INT_MIN)
 			return (free_stack(stack), failure());
 	}
-	if ((ft_strlen(num) == 1 && sign == -1))
+	if (ft_strlen(num) == 1 && (num[0] == '+' || num[0] == '-'))
 		return (free_stack(stack), failure());
 	*n = temp * sign;
 }
