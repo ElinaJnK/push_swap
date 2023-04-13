@@ -49,7 +49,7 @@ void	check_digit(char *num, int *n, t_stack	*stack)
 		if (num[i] < '0' || num[i] > '9')
 			return (free_stack(stack), failure());
 		temp = temp * 10 + num[i++] - '0';
-		if (temp > INT_MAX || temp < INT_MIN)
+		if (temp > INT_MAX || (temp * sign) < INT_MIN)
 			return (free_stack(stack), failure());
 	}
 	if (ft_strlen(num) == 1 && (num[0] == '+' || num[0] == '-'))
