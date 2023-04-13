@@ -1,7 +1,3 @@
-## A faire avant rendu:
-
-METTRE MA LIBFT :D
-
 ## Steps
 
 1.	Pre-Sort
