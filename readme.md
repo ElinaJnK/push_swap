@@ -1,3 +1,15 @@
+# README - push_swap
+
+## Files
+
+- check_params.c : check the arguments
+- quicksort.c : implementation of the quicksort algorithm in order to get the order we want
+- presort.c : implementation of the "mediane" concept mentionned down below
+- costs.c/cost_utils.c/do_while_cost.c : files implementing the "cost" concept mentionned down below
+- moves.c/double_moves.c/stack.c : an easier way to do the moves required by the algorithm
+- sort_n.c : different sorting techniques depending on the size of the stack
+- main.c : :)
+
 ## Steps
 
 1.	Pre-Sort
@@ -9,7 +21,7 @@
 	- Une boucle qui trouve l'element le moins cher a rotate
 	- Une fonction qui fait les movements (rotation) de l'element donne
 
-## Pensees du soir bonsoir
+## Costs (TO DO)
 En gros I think I remember  
 Le but c'est de tout foutre dans b (sauf trois element maybe)  
 Apres, on calcule la fct de coups (donc en gros un array qui donne a chaque valeur dans b un numero selon ce qui est - cher) aka   -> rb est - cher, le coups est positif selon combien de coups il faut faire  
@@ -50,4 +62,6 @@ Nous on veut [7, 9, 28, 101] :
 	101	[3]
 	a  
 
-Donc apres quicksort faut affecter aux t_elem stack->tab[i].pos les positions voulues pour chaque stack->tab[i].val  
+Donc apres quicksort faut affecter aux t_elem stack->tab[i].pos les positions voulues pour chaque stack->tab[i].val
+
+## Means (TO DO)
