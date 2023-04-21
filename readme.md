@@ -22,46 +22,7 @@
 	- Une fonction qui fait les movements (rotation) de l'element donne
 
 ## Costs (TO DO)
-En gros I think I remember  
-Le but c'est de tout foutre dans b (sauf trois element maybe)  
-Apres, on calcule la fct de coups (donc en gros un array qui donne a chaque valeur dans b un numero selon ce qui est - cher) aka   -> rb est - cher, le coups est positif selon combien de coups il faut faire  
--> rrb est moins cher, le coups est negatif selon combien de coups il faut faire  
--> coups montre juste cmb de coups il faut pour remonter au sommet  
--> on fait ensuite la meme chose pour a -> combien chaque coups doit etre rotate.  
--> on calcule ensuite (grace aux indices que l'on a trouve en faisant le sort) le meilleur endroit pour chaque element de b, si on a   
-1[0] 5[2]  
-4[1] 6[3]  
-7[4] 8[5]  
-a 	 b  
-1 4 5 6 7 8  
--> On prend un indice dans b (2 par exemple)  
--> 5[2] est entre 0 et 1  
--> le coups de deplacer 5 est de 0, le coups de deplacer 4[1] au sommet de la pile est de 1 -> 1 au total (ra)  
--> pour 3, le coups de deplacer 6[3] au sommet de la pile est de 1 et le coups de deplacer 4 au sommet de la pile est de -1 -> soit 2 au total (rb et rra)  
--> le coups de deplacer 8[5] au sommet de la pile est de -1 et pas besoin de deplacer 1[0] -> -1 au total (rrb)  
 
-Si on avait -1 et -1 on pourrait ainsi faire rrr  
--> 1 et 1 -> rr  
--> on trie ainsi la liste  
-
-## Tableau
-
-Dans le tableau on suuppose que le premier element est situe au sommet de la Stack.  
-
-Donc, si on a [9, 101, 7, 28] la stack a:  
-	9	[1]
-	101	[3]
-	7	[0]
-	28	[2]
-	a  
-
-Nous on veut [7, 9, 28, 101] :  
-	7	[0]
-	9	[1]
-	28	[2]
-	101	[3]
-	a  
-
-Donc apres quicksort faut affecter aux t_elem stack->tab[i].pos les positions voulues pour chaque stack->tab[i].val
+## Array (TO DO)
 
 ## Means (TO DO)
